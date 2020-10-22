@@ -16,23 +16,11 @@ RUN rpm -Uvh http://rpms.famillecollet.com/enterprise/remi-release-7.rpm
 RUN yum-config-manager --enable remi-php56
 RUN yum -y install openssl 
 RUN yum -y install php
-RUN yum -y install php-xml php-common php-mbstring php-gd php-mcrypt php-cli \
+RUN yum -y install php-xml php-common php-mbstring php-gd php-mcrypt php-cli php-fpm \
                    php-pdo php-mysql php-zip php-tokenizer php-pear php-pecl-memcache
-
-RUN yum -y install libevent libevent-devel
-RUN yum -y install php5-memcached memcached
-RUN yum -y install libmemcached
-
-COPY .docker/memcached.conf /etc/memcached.conf
-COPY .docker/memcached /etc/sysconfig/memcached
-
-RUN yum -y install initscripts && yum clean all
 
 # PHP-FPM needs this folder
 RUN mkdir -p /run/php-fpm
-
-# RUN pecl install memcached-2.2.0
-# RUN echo extension=memcached.so >> /usr/local/etc/php/conf.d/memcached.ini
 
 # Install pip
 RUN yum -y install python-pip

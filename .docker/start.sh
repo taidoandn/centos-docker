@@ -2,5 +2,3 @@
 httpd -v
 php -v
 supervisord -n -c /etc/supervisord.conf
-
-service memcached restart
